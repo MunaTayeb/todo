@@ -7,14 +7,26 @@
 
 import SwiftUI
 
+/*
+ 
+ MVVM Architecture
+ Model - Data Point
+ View - UI of the APP
+ ViewModel - Manages Models for views
+
+ */
+
 @main
 struct todoApp: App {
-    let persistenceController = PersistenceController.shared
+   
+    @StateObject var listViewModel: ListViewModel = ListViewModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationView{
+                ListView()
+            }
+            .environmentObject(listViewModel)
         }
     }
 }
